@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Alicia's Hockey School - Interactive Logo</title>
+
+<!-- Welcome to ZIM at https://zimjs.com - Code Creativity!              	        -->
+<!-- ZIM runs on the HTML Canvas powered by JavaScript and CreateJS https://createjs.com -->
+<!-- Founded by Inventor Dan Zen - http://danzen.com - Canadian New Media Award Winner 	-->
+<!-- ZIM is free to use. You can donate to help improve ZIM at http://zimjs.com/donate 	-->
+
+<script src="https://d309knd7es5f10.cloudfront.net/createjs_1.1_min.js"></script>
+<script src="https://d309knd7es5f10.cloudfront.net/zim_8.3.0.js"></script>
+<!-- use zimjs.com/distill for minified individual functions! -->
+
+<script>
+
+// SCALING OPTIONS
+// scaling can have values as follows with full being the default
+// "fit"	sets canvas and stage to dimensions and scales to fit inside window size
+// "outside"	sets canvas and stage to dimensions and scales to fit outside window size
+// "full"	sets stage to window size with no scaling
+// "tagID"	add canvas to HTML tag of ID - set to dimensions if provided - no scaling
+
+var scaling = "fit"; // this will resize to fit inside the screen dimensions
+var width = 1024;
+var height = 768;
+var color = dark; // ZIM colors like green, blue, pink, faint, clear, etc. available globally
+var outerColor = light; // any HTML colors like "violet", "#333", etc. fine to use
+var assets = "fierce-logo.png"
+var path = "assets/"
+
+var frame = new Frame(scaling, width, height, color, outerColor, assets, path);
+frame.on("ready", function() {
+    zog("ready from ZIM Frame"); // logs in console (F12 - choose console)
+
+    var stage = frame.stage;
+    var stageW = frame.width;
+    var stageH = frame.height;
+
+	var arena = new Container();
+	stage.addChild(arena);
+	arena.x = 450; arena.y = 250;
+
+	var rink = new Rectangle({width:400, height:200, color:light, corner:20}) //rink
+		.center()
+		.addTo(arena);
+
+	new Rectangle ({width:15, height:38, color:rink.color, borderColor:"black", corner:1}).pos(331,366).addTo(arena); //left crease
+	new Rectangle ({width:2, height:200, color:red, corner:2}).pos(330,284).addTo(arena); //left end line
+
+	var topLeft = new Circle (35, light, red, 2).center().pos(347,300).addTo(arena); //left circle top
+	new Rectangle ({width:2, height:10, color:red}).pos(370,369).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(390,369).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(370,291).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(390,291).addTo(arena); //hashmarks
+	var bottomLeft = new Circle (35, light, red, 2).center().pos(347,400).addTo(arena); //left circle bottom
+	new Rectangle ({width:2, height:10, color:red}).pos(370,468).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(390,468).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(370,391).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(390,391).addTo(arena); //hashmarks
+
+	new Rectangle ({width:5, height:200, color:"#353980"}).pos(440,284).addTo(arena); //left blue line
+	new Rectangle ({width:6, height:200, color:red}).center().addTo(arena); //center line
+	var logo = frame.asset("fierce-logo.png").sca(1.2).center().addTo(arena); //fierce logo
+	new Rectangle ({width:5, height:200, color:"#353980"}).pos(580,284).addTo(arena); //right blue line
+
+	var topRight = new Circle (35, light, red, 2).center().pos(608,300).addTo(arena); //right circle top
+	new Rectangle ({width:2, height:10, color:red}).pos(632,291).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(652,291).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(632,369).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:10, color:red}).pos(652,369).addTo(arena); //hashmarks
+	var bottomRight = new Circle (35, light, red, 2).center().pos(608,400).addTo(arena); //right circle bottom
+	new Rectangle ({width:2, height:12, color:red}).pos(632,468).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:12, color:red}).pos(652,468).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:12, color:red}).pos(632,391).addTo(arena); //hashmarks
+	new Rectangle ({width:2, height:12, color:red}).pos(652,391).addTo(arena); //hashmarks
+
+    new Rectangle ({width:15, height:38, color:rink.color, borderColor:"black", corner:1}).pos(678,366).addTo(arena); //right crease
+	new Rectangle ({width:2, height:200, color:red, corner:2}).pos(692,284).addTo(arena); //right end line
+
+	new Circle(3, red).center(topLeft).addTo(arena); //topLeft dot
+	new Circle(3, red).center(topRight).addTo(arena); //topRight dot
+	new Circle(3, red).center(bottomLeft).addTo(arena); //bottomLeft dot
+	new Circle(3, red).center(bottomRight).addTo(arena); //bottomRight dot
+	new Circle(3, red).pos(462,318).addTo(arena); //neutralTopLeft dot
+	new Circle(3, red).pos(555,318).addTo(arena); //neutraltopRight dot
+	new Circle(3, red).pos(462,448).addTo(arena); //neutralbottomLeft dot
+	new Circle(3, red).pos(555,448).addTo(arena); //neutralbottomRight dot
+
+    var leftNet = new Rectangle ({width:12, height:40, color:red, corner:5}).pos(321,365).addTo(arena); //left net
+    var rightNet = new Rectangle ({width:12, height:40, color:red, corner:5}).pos(692,365).addTo(arena); //right net
+
+    var rightBuzz = new Rectangle({width:18, height:25, color:"gray", corner:5}).pos(726, 370); //right buzzer top
+    new Rectangle({width:30, height:8, color:"gray", corner:5}).pos(720, 390); //right buzzer base
+    var leftBuzz = new Rectangle({width:18, height:25, color:"gray", corner:5}).pos(281, 370); //left buzzer top
+    new Rectangle({width:30, height:8, color:"gray", corner:5}).pos(275, 390); //left buzzer base
+
+    var instructions = new Label({
+        text:"CLICK TO PLAY!",
+        size:45,
+        font:"courier",
+        color:"white",
+        fontOptions:"bold"
+    }).addTo(arena).pos(-122,185);
+
+    arena.on("click", function() {
+		instructions.removeFrom();
+	});
+
+	var puck = new Circle({radius:12, color:"black"}) //puck
+		.center(arena);
+
+	arena.mouseChildren = false;
+
+	var parts=[];
+	arena.loop(function (part) {
+		parts.push(part);
+	});
+
+	var controller = new MotionController({
+		container:arena,
+		target:puck,
+		type:"mousedown",
+		boundary: rink,
+		diagonal:true,
+		damp:.2,
+		mouseDownIncludes:parts
+	});
+
+	Ticker.add(function () {
+		if (puck.hitTestBounds(rightNet)) {
+			rightBuzz.color = "red";
+			puck.center(arena);
+        	//zog("Goal");
+        	stage.update();
+		} else {
+			rightBuzz.color = "gray";
+		};
+
+		if (puck.hitTestBounds(leftNet)) {
+			leftBuzz.color = "red";
+	        //zog("Goal");
+			puck.center(arena);
+	        stage.update();
+		} else {
+	        leftBuzz.color = "gray";
+	    };
+	});
+
+	arena.on("click", function() {
+		puck.animate({x:stage.mouseX, y:stage.mouseY}, 500);
+	});
+
+    stage.update(); // this is needed to show any changes
+
+}); // end of ready
+
+</script>
+
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+
+</head>
+
+<body>
+<!-- canvas with id="myCanvas" is made by zim Frame -->
+</body>
+</html>
